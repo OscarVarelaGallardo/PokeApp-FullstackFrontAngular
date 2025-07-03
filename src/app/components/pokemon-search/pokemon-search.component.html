@@ -1,0 +1,24 @@
+<div class="container">
+  <h1>Buscar Pokémon</h1>
+  <input [(ngModel)]="pokemonName" placeholder="Ej. pikachu" (keydown.enter)="buscarPokemon()" />
+  <button (click)="buscarPokemon()">Buscar</button>
+
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <div *ngIf="pokemonData" class="card">
+    <h2>{{ pokemonData.name | uppercase }}</h2>
+    <img [src]="pokemonData.imageBase64" [alt]="pokemonData.name" />
+    <p><strong>Tipos:</strong> {{ pokemonData.types.join(', ') }}</p>
+    <p><strong>Habilidades:</strong> {{ pokemonData.abilities.join(', ') }}</p>
+    <p><strong>Ataques:</strong> {{ pokemonData.moves.join(', ') }}</p>
+
+    <div *ngIf="statsList.length > 0">
+      <strong>Estadísticas:</strong>
+      <ul>
+        <li *ngFor="let stat of statsList">
+          {{ stat.key }}: {{ stat.value }}
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
